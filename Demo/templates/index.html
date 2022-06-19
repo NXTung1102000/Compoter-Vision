@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demos</title>
+</head>
+<body>
+    <h2>Feature Detection</h2>
+    <h3>Upload a picture</h3>
+    <p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </p>
+    {% if filename %}
+    <div style="padding: 20px; width: 1500px;">
+        <img src="{{ url_for('display_image', filename=filename)}}" alt="Picture uploaded" style="max-width: 100%; width: 730px;">
+        <img src="{{ url_for('display_result_image', filename=result)}}" alt="Picture uploaded" style="max-width: 100%; width: 730px; margin-left: 20px">
+    </div>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" id="image">
+        <button type="submit">Detect</button>
+    </form>
+</body>
+</html>
